@@ -4,6 +4,9 @@ import {
   createContext,
   Dispatch,
   ReactNode,
+  useRef,
+  useEffect,
+  useCallback,
 } from "react";
 import { TerminalOutput, TerminalInput } from "~/components/terminal-base";
 
@@ -20,7 +23,11 @@ interface TerminalState {
 
 const initialState: TerminalState = {
   terminalLineData: [
-    <TerminalOutput key={0}>Protip: Click to load the portfolio website right away</TerminalOutput> as ReactNode,
+    (
+      <TerminalOutput key={0}>
+        Protip: Click to speed up portfolio loading
+      </TerminalOutput>
+    ) as ReactNode,
   ],
   currentLine: null,
 };
@@ -96,6 +103,31 @@ export const useTerminalState = () => {
   if (context === undefined) {
     throw new Error("useTerminalState must be used within a TerminalProvider");
   }
+
+  const disableTypingSpeedRef = useRef(false);
+
+  const handleKeyPress = useCallback((event: KeyboardEvent) => {
+    if (event.key === "Enter") {
+      disableTypingSpeedRef.current = true;
+    }
+  }, []);
+
+  const handleClickOrTap = useCallback(() => {
+    disableTypingSpeedRef.current = true;
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyPress);
+    window.addEventListener("click", handleClickOrTap);
+    window.addEventListener("touchstart", handleClickOrTap);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+      window.removeEventListener("click", handleClickOrTap);
+      window.removeEventListener("touchstart", handleClickOrTap);
+    };
+  }, [handleKeyPress, handleClickOrTap]);
+
   return {
     addInputLine: (line: ReactNode) =>
       context?.dispatch?.({ type: "ADD_INPUT_LINE", payload: line }),
@@ -105,5 +137,6 @@ export const useTerminalState = () => {
     setCurrentLine: (line: ReactNode) =>
       context?.dispatch?.({ type: "SET_CURRENT_LINE", payload: line }),
     state: context?.state,
+    disableTypingSpeedRef,
   };
 };

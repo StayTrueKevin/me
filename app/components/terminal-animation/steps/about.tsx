@@ -1,29 +1,35 @@
 import { TypeAnimation } from "react-type-animation";
 import Avatar from "~/components/avatar";
 import { useTerminalState } from "~/components/terminal-base/useTerminalState";
-import { TYPING_SPEED } from "./consts";
-import { waitTypingPromise } from "~/utils";
+import { getTypingSpeeds, waitTypingPromise } from "~/utils";
 
 export default function useTerminalStepAbout() {
-  const { setCurrentLine, addInputLine, addOutputLine } = useTerminalState();
+  const { setCurrentLine, addInputLine, addOutputLine, disableTypingSpeedRef } =
+    useTerminalState();
 
   const fn = async () => {
     setCurrentLine(
       <TypeAnimation
         sequence={[
           "open ",
-          TYPING_SPEED,
+          getTypingSpeeds(disableTypingSpeedRef).typingSpeed,
           "open abo",
-          TYPING_SPEED,
+          getTypingSpeeds(disableTypingSpeedRef).typingSpeed,
           "open about",
-          TYPING_SPEED,
+          getTypingSpeeds(disableTypingSpeedRef).typingSpeed,
         ]}
+        speed={{
+          type: "keyStrokeDelayInMs",
+          value: getTypingSpeeds(disableTypingSpeedRef).keystrokeSpeed,
+        }}
         wrapper="span"
         cursor
         className="text-[18px] text-secondary-yellow"
       />
     );
-    await waitTypingPromise();
+    await waitTypingPromise(
+      getTypingSpeeds(disableTypingSpeedRef).typingSpeedCommand
+    );
     addInputLine(<b>about</b>);
     addOutputLine(<Avatar />);
     addOutputLine(

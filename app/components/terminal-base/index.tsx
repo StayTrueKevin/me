@@ -21,7 +21,6 @@ export interface Props {
   currentLineInput?: ReactNode;
 }
 
-// TODO: Add shortcut if you press enter or tap screen it just speed up all animations and render all steps
 // TODO: If you click close, show matrix (easter egg)
 const Terminal = ({
   name,

@@ -1,15 +1,14 @@
 import useTerminalStepAbout from "./about";
 import useTerminalStepExpertises from "./expertises";
-import { TYPING_SPEED } from "./consts";
 import { useEffectOnce } from "~/hooks/useEffectOnce";
 import useTerminalStepProjects from "./projects";
 import useTerminalStepWork from "./work";
 import { useTerminalState } from "~/components/terminal-base/useTerminalState";
 import { TypeAnimation } from "react-type-animation";
-import { waitTypingPromise } from "~/utils";
+import { getTypingSpeeds, waitTypingPromise } from "~/utils";
 
 export default function useTerminalAnimation() {
-  const { setCurrentLine } = useTerminalState();
+  const { setCurrentLine, disableTypingSpeedRef } = useTerminalState();
 
   const fnStepAbout = useTerminalStepAbout();
   const fnStepExpertises = useTerminalStepExpertises();
@@ -18,25 +17,29 @@ export default function useTerminalAnimation() {
   useEffectOnce(() => {
     (async () => {
       await fnStepAbout();
-      await waitTypingPromise();
+      await waitTypingPromise(getTypingSpeeds(disableTypingSpeedRef).typingSpeedCommand);
       await fnStepExpertises();
-      await waitTypingPromise();
+      await waitTypingPromise(getTypingSpeeds(disableTypingSpeedRef).typingSpeedCommand);
       await fnStepProjects();
-      await waitTypingPromise();
+      await waitTypingPromise(getTypingSpeeds(disableTypingSpeedRef).typingSpeedCommand);
       await fnStepWork();
-      await waitTypingPromise();
+      await waitTypingPromise(getTypingSpeeds(disableTypingSpeedRef).typingSpeedCommand);
       setCurrentLine(
         <TypeAnimation
           sequence={[
             "Made wi",
-            TYPING_SPEED,
+            getTypingSpeeds(disableTypingSpeedRef).typingSpeed,
             "Made with ♥️ by Kev",
-            TYPING_SPEED,
+            getTypingSpeeds(disableTypingSpeedRef).typingSpeed,
             "Made with ♥️ by Kevin Faveri",
-            TYPING_SPEED,
+            getTypingSpeeds(disableTypingSpeedRef).typingSpeed,
           ]}
           wrapper="span"
           cursor
+          speed={{
+            type: "keyStrokeDelayInMs",
+            value: getTypingSpeeds(disableTypingSpeedRef).keystrokeSpeed,
+          }}
           className="text-[18px] text-secondary-yellow"
         />
       );
