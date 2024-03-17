@@ -1,4 +1,4 @@
-import Terminal, { ColorMode } from "../terminal-base";
+import Terminal from "../terminal-base";
 import useTerminalAnimation from "./steps";
 
 export const TerminalAnimation = () => {
@@ -7,7 +7,6 @@ export const TerminalAnimation = () => {
     <Terminal
       name="KevinFaveri@MBP"
       prompt="~/projects/old/work/portfolio"
-      colorMode={ColorMode.Dark}
     />
   );
 };

@@ -18,7 +18,6 @@ body {
   font-size: 18px;
   font-family: "JetBrains Mono", monospace;
   border-radius: 4px;
-  padding: 75px 45px 35px;
   position: relative;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -28,20 +27,6 @@ body {
   overflow: auto;
   display: flex;
   flex-direction: column;
-}
-
-.react-terminal-wrapper.react-terminal-light {
-  background: #ddd;
-  color: #1a1e24;
-}
-
-.react-terminal-window-buttons {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
 }
 
 .react-terminal-window-buttons button {
@@ -67,7 +52,7 @@ body {
   background: #3ec930;
 }
 
-.react-terminal-wrapper:after {
+.react-terminal-wrapperd:after {
   content: attr(data-terminal-name);
   position: absolute;
   color: #007a4c;
@@ -76,10 +61,6 @@ body {
   width: 100%;
   text-align: center;
   pointer-events: auto;
-}
-
-.react-terminal-wrapper.react-terminal-light:after {
-  color: #d76d77;
 }
 
 .react-terminal-line {
@@ -92,10 +73,6 @@ body {
   display: inline-block;
   color: #007a4c;
   margin-top: 0.5em;
-}
-
-.react-terminal-light .react-terminal-line:before {
-  color: #d76d77;
 }
 
 .terminal-input {
@@ -137,18 +114,3 @@ body {
   position: fixed;
   left: -1000px;
 }
-
-/* .react-terminal-progress {
-  display: flex;
-  margin: .5rem 0;
-}
-
-.react-terminal-progress-bar {
-  background-color: #fff;
-  border-radius: .25rem;
-  width: 25%;
-}
-
-.react-terminal-wrapper.react-terminal-light .react-terminal-progress-bar {
-  background-color: #000;
-} */
