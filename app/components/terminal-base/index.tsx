@@ -30,7 +30,7 @@ const Terminal = ({
   const scrollIntoViewRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="react-terminal-wrapper h-full overflow-auto">
+    <div className="react-terminal-wrapper h-full overflow-hidden">
       <div className="flex justify-between items-center px-4 py-0 rounded-tl-3xl mb-2 rounded-tr-3xl bg-[#363d4a] sticky top-0 z-10">
         <div className="react-terminal-window-buttons space-x-2">
           <button
@@ -95,7 +95,7 @@ const Terminal = ({
           </nav>
         </div>
       </div>
-      <div className="react-terminal h-full px-4 overflow-hidden">
+      <div className="react-terminal h-full px-4 overflow-auto box-border py-5">
         {state?.terminalLineData}
         <div
           className="react-terminal-line react-terminal-input react-terminal-active-input"

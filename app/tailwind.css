@@ -29,6 +29,10 @@ body {
   flex-direction: column;
 }
 
+.react-terminal > *:last-child {
+  margin-bottom: 100px;
+}
+
 .react-terminal-window-buttons button {
   width: 15px;
   height: 15px;
