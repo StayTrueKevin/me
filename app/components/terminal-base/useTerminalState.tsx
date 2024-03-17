@@ -20,7 +20,7 @@ interface TerminalState {
 
 const initialState: TerminalState = {
   terminalLineData: [
-    <div key={0}>Protip: Click to load the portfolio website right away</div> as ReactNode,
+    <TerminalOutput key={0}>Protip: Click to load the portfolio website right away</TerminalOutput> as ReactNode,
   ],
   currentLine: null,
 };

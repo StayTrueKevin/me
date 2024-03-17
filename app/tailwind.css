@@ -24,7 +24,10 @@ body {
 }
 
 .react-terminal {
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  white-space: pre-wrap;
+  
   display: flex;
   flex-direction: column;
 }
@@ -34,8 +37,6 @@ body {
 }
 
 .react-terminal-window-buttons button {
-  width: 15px;
-  height: 15px;
   border-radius: 50%;
   border: 0;
 }
@@ -67,10 +68,6 @@ body {
   pointer-events: auto;
 }
 
-.react-terminal-line {
-  white-space: pre;
-}
-
 .react-terminal-line:before {
   /* Set up defaults and ensure empty lines are displayed. */
   content: "";
@@ -84,8 +81,7 @@ body {
   border-bottom: 2px solid #007a4c;
 }
 
-.react-terminal-input[data-terminal-prompt]:before {
-  content: attr(data-terminal-prompt);
+.react-terminal-input.react-terminal-prompt {
   margin-right: 0.5em;
 }
 

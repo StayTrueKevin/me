@@ -9,7 +9,7 @@ const TerminalInput = ({ children, prompt }: TerminalInputProps) => {
     <div
       className="react-terminal-line react-terminal-input terminal-input flex items-center mt-2"
     >
-      <img src="/terminal.svg" width={16} height={16} alt="Terminal" className="ml--2" />
+      <img src="/terminal.svg" alt="Terminal" className="ml--2 !h-[16px] !w-[16px]" />
       {children}
     </div>
   );
