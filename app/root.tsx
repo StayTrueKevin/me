@@ -27,9 +27,26 @@ export default function App() {
         <Meta />
         <Links />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin=""
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+          rel="stylesheet"
+        />
         <link rel="icon" href={iconSrc} />
+        <meta property="og:image" content="https://kevin.faveri.dev/og" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:url" content="https://kevin.faveri.dev" />
+        <meta property="og:title" content="Kevin Faveri's Portfolio" />
+        <meta
+          property="og:description"
+          content="Kevin Faveri | Portfolio | Web3, Ordinals, Solana, Open Source and more..."
+        />
       </head>
       <body>
         <Outlet />

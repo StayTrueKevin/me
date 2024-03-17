@@ -7,7 +7,7 @@ import { WindowStateProvider } from "~/hooks/useWindowState";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Kevin Faveri Portfolio" },
+    { title: "Kevin Faveri's Portfolio" },
     {
       name: "description",
       content:
