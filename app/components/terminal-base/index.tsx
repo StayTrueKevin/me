@@ -10,6 +10,7 @@ import {
   FaTwitter,
 } from "react-icons/fa";
 import useInterval from "~/hooks/useInterval";
+import { WindowState, useWindowState } from "~/hooks/useWindowState";
 
 export interface Props {
   name?: string;
@@ -21,14 +22,11 @@ export interface Props {
   currentLineInput?: ReactNode;
 }
 
-// TODO: If you click close, show matrix (easter egg)
-const Terminal = ({
-  name,
-  prompt,
-  redBtnCallback,
-  yellowBtnCallback,
-  greenBtnCallback,
-}: Props) => {
+const Terminal = ({ name, prompt }: Props) => {
+  const { windowState, setWindowState } = useWindowState();
+  const isClosed = windowState === WindowState.Closed;
+  const isExpandedMinimum = windowState === WindowState.ExpandedMinimum;
+  const isMinimized = windowState === WindowState.Minimized;
   const { state } = useTerminalState();
   const [hasMoreToScroll, setHasMoreToScroll] = useState(false);
 
@@ -57,26 +55,48 @@ const Terminal = ({
   }, [checkForScroll]);
 
   return (
-    <div className="react-terminal-wrapper h-full overflow-hidden">
-      <div className="flex justify-between items-center px-4 py-0 rounded-tl-3xl mb-2 rounded-tr-3xl bg-[#363d4a] sticky top-0 z-10">
-        <div className="react-terminal-window-buttons space-x-2 flex-1">
+    <div
+      className="react-terminal-wrapper overflow-hidden z-10 p-2 bg-transparent transition-all duration-300 ease-in-out"
+      style={{
+        display: isClosed ? "none" : "inline-block",
+        width: isExpandedMinimum && !isClosed && !isMinimized ? "75%" : "99%",
+        height: isMinimized ? "auto" : "95%",
+      }}
+    >
+      <div
+        className="flex justify-between items-center py-0 rounded-tl-3xl bg-[#363d4a] z-20 w-full rounded-tr-3xl"
+        style={{
+          position: isMinimized ? "absolute" : "sticky",
+          bottom: 0,
+        }}
+      >
+        <div className="react-terminal-window-buttons space-x-2 flex-1 ml-4">
           <button
             className="clickable red-btn p-0 h-[10px] w-[10px] md:h-[15px] md:w-[15px]"
-            disabled={!redBtnCallback}
-            onClick={redBtnCallback}
+            onClick={() => setWindowState(WindowState.Closed)}
           />
           <button
             className="clickable yellow-btn p-0 h-[10px] w-[10px] md:h-[15px] md:w-[15px]"
-            disabled={!yellowBtnCallback}
-            onClick={yellowBtnCallback}
+            onClick={() =>
+              setWindowState(
+                windowState === WindowState.Minimized
+                  ? WindowState.ExpandedFull
+                  : WindowState.Minimized
+              )
+            }
           />
           <button
             className="clickable green-btn p-0 h-[10px] w-[10px] md:h-[15px] md:w-[15px]"
-            disabled={!greenBtnCallback}
-            onClick={greenBtnCallback}
+            onClick={() =>
+              setWindowState(
+                windowState === WindowState.ExpandedFull
+                  ? WindowState.ExpandedMinimum
+                  : WindowState.ExpandedFull
+              )
+            }
           />
         </div>
-        <div className="flex justify-between items-center space-x-2 flex-1">
+        <div className="flex justify-between items-center space-x-2 flex-1 mr-4">
           <div className="text-primary-green font-bold text-xs sm:text-sm md:text-lg">
             {name}
           </div>
@@ -128,9 +148,12 @@ const Terminal = ({
         </div>
       </div>
       <div
-        className="react-terminal h-full px-4 overflow-auto box-border py-5"
+        className="react-terminal h-full px-4 overflow-auto box-border py-5 bg-[#252a33] rounded-br-3xl rounded-bl-3xl"
         ref={scrollRef}
         onScroll={checkForScroll}
+        style={{
+          display: isMinimized ? "none" : "block",
+        }}
       >
         {state?.terminalLineData}
         <div

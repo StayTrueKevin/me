@@ -1,6 +1,9 @@
 import type { MetaFunction } from "@remix-run/node";
+import Exec from "~/components/exec";
+import { MatrixRain } from "~/components/matrix-rain";
 import { TerminalAnimation } from "~/components/terminal-animation";
 import { TerminalProvider } from "~/components/terminal-base/useTerminalState";
+import { WindowStateProvider } from "~/hooks/useWindowState";
 
 export const meta: MetaFunction = () => {
   return [
@@ -15,10 +18,14 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   return (
-    <TerminalProvider>
-      <div className="h-full">
-        <TerminalAnimation />
-      </div>
-    </TerminalProvider>
+    <WindowStateProvider>
+      <TerminalProvider>
+        <div className="h-full w-full flex justify-center">
+          <Exec />
+          <MatrixRain />
+          <TerminalAnimation />
+        </div>
+      </TerminalProvider>
+    </WindowStateProvider>
   );
 }

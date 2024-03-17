@@ -7,17 +7,18 @@ body {
   box-sizing: border-box;
   margin: 0;
   font-family: "JetBrains Mono", monospace;
-  background-color: #252a33;
   height: 100%;
+}
+
+html {
+  background-color: #252a33;
 }
 
 .react-terminal-wrapper {
   width: 100%;
-  background: #252a33;
   color: #eab308;
   font-size: 18px;
   font-family: "JetBrains Mono", monospace;
-  border-radius: 4px;
   position: relative;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -55,17 +56,6 @@ body {
 
 .react-terminal-window-buttons button.green-btn {
   background: #3ec930;
-}
-
-.react-terminal-wrapperd:after {
-  content: attr(data-terminal-name);
-  position: absolute;
-  color: #007a4c;
-  top: 5px;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  pointer-events: auto;
 }
 
 .react-terminal-line:before {

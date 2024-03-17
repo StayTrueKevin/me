@@ -16,6 +16,7 @@ export default function useTerminalAnimation() {
   const fnStepWork = useTerminalStepWork();
   useEffectOnce(() => {
     (async () => {
+      await waitTypingPromise(getTypingSpeeds(disableTypingSpeedRef).typingSpeedCommand);
       await fnStepAbout();
       await waitTypingPromise(getTypingSpeeds(disableTypingSpeedRef).typingSpeedCommand);
       await fnStepExpertises();
