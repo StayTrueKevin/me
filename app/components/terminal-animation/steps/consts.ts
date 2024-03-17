@@ -1,0 +1,2 @@
+export const TYPING_SPEED = 400;
+export const TYPING_SPEED_FULL_COMMAND = TYPING_SPEED * 5;
