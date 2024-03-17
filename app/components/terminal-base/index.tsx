@@ -60,7 +60,7 @@ const Terminal = ({ name, prompt }: Props) => {
       style={{
         display: isClosed ? "none" : "inline-block",
         width: isExpandedMinimum && !isClosed && !isMinimized ? "75%" : "99%",
-        height: isMinimized ? "auto" : "95%",
+        height: isMinimized ? "auto" : "99%",
       }}
     >
       <div
@@ -86,7 +86,7 @@ const Terminal = ({ name, prompt }: Props) => {
             }
           />
           <button
-            className="clickable green-btn p-0 h-[10px] w-[10px] md:h-[15px] md:w-[15px]"
+            className="clickable green-btn p-0 h-[10px] w-[10px] md:h-[15px] md:w-[15px] hidden md:inline-block"
             onClick={() =>
               setWindowState(
                 windowState === WindowState.ExpandedFull
