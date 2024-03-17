@@ -1,7 +1,8 @@
 import { TypeAnimation } from "react-type-animation";
 import Avatar from "~/components/avatar";
 import { useTerminalState } from "~/components/terminal-base/useTerminalState";
-import { TYPING_SPEED, TYPING_SPEED_FULL_COMMAND } from "./consts";
+import { TYPING_SPEED } from "./consts";
+import { waitTypingPromise } from "~/utils";
 
 export default function useTerminalStepAbout() {
   const { setCurrentLine, addInputLine, addOutputLine } = useTerminalState();
@@ -22,9 +23,7 @@ export default function useTerminalStepAbout() {
         className="text-[18px] text-secondary-yellow"
       />
     );
-    await new Promise((resolve) =>
-      setTimeout(resolve, TYPING_SPEED_FULL_COMMAND)
-    );
+    await waitTypingPromise();
     addInputLine(<b>about</b>);
     addOutputLine(<Avatar />);
     addOutputLine(

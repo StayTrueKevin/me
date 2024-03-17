@@ -1,7 +1,8 @@
 import { TypeAnimation } from "react-type-animation";
 import { useTerminalState } from "~/components/terminal-base/useTerminalState";
-import { TYPING_SPEED, TYPING_SPEED_FULL_COMMAND } from "./consts";
+import { TYPING_SPEED } from "./consts";
 import Work from "~/components/work";
+import { waitTypingPromise } from "~/utils";
 
 export default function useTerminalStepWork() {
   const { setCurrentLine, addInputLine, addOutputLine } = useTerminalState();
@@ -23,7 +24,7 @@ export default function useTerminalStepWork() {
       />
     );
 
-    await new Promise((resolve) => setTimeout(resolve, TYPING_SPEED_FULL_COMMAND));
+    await waitTypingPromise();
 
     addInputLine(<b>work</b>);
     addOutputLine(<Work />);

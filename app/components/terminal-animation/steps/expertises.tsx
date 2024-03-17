@@ -1,7 +1,8 @@
 import { TypeAnimation } from "react-type-animation";
 import { useTerminalState } from "~/components/terminal-base/useTerminalState";
-import { TYPING_SPEED, TYPING_SPEED_FULL_COMMAND } from "./consts";
+import { TYPING_SPEED } from "./consts";
 import Expertises from "~/components/expertises";
+import { waitTypingPromise } from "~/utils";
 
 export default function useTerminalStepExpertises() {
   const { setCurrentLine, addInputLine, addOutputLine } = useTerminalState();
@@ -23,8 +24,7 @@ export default function useTerminalStepExpertises() {
       />
     );
 
-    await new Promise((resolve) => setTimeout(resolve, TYPING_SPEED_FULL_COMMAND));
-
+    await waitTypingPromise();
     addInputLine(<b>expertise</b>);
     addOutputLine(<Expertises />);
     addOutputLine("Back-end services with NodeJS and Rust; and front-end apps with React.");

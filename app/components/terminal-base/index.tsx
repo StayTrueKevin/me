@@ -15,10 +15,8 @@ export interface Props {
 }
 
 // TODO: Improve mobile
-// TODO: Do some level of code abstraction
-// TODO: Add a way to indicate there's scroll still; and show scrollbar
-// TODO: Add shorcut if you press enter or tap screen it just speed up all animations and render all steps
-// TODO: Add socials to header
+// TODO: Add a way to indicate there's scroll still (useful for mobile)
+// TODO: Add shortcut if you press enter or tap screen it just speed up all animations and render all steps
 // TODO: If you click close, show matrix (easter egg)
 const Terminal = ({
   name,
@@ -32,7 +30,7 @@ const Terminal = ({
   const scrollIntoViewRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="react-terminal-wrapper h-full">
+    <div className="react-terminal-wrapper h-full overflow-auto">
       <div className="flex justify-between items-center px-4 py-0 rounded-tl-3xl mb-2 rounded-tr-3xl bg-[#363d4a] sticky top-0 z-10">
         <div className="react-terminal-window-buttons space-x-2">
           <button
@@ -97,7 +95,7 @@ const Terminal = ({
           </nav>
         </div>
       </div>
-      <div className="react-terminal h-full px-4">
+      <div className="react-terminal h-full px-4 overflow-hidden">
         {state?.terminalLineData}
         <div
           className="react-terminal-line react-terminal-input react-terminal-active-input"
